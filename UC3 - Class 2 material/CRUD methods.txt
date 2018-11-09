@@ -1,0 +1,9 @@
+http request
+	post	- 	crear	/ create (C)
+	get		-	leer 	/ read 	 (R)
+	put		-	editar	/ update (U)
+	delete	-	borrar	/ delete (D)
+
+
+	CRUD Methods
+
