@@ -12,133 +12,149 @@ function makeXhrRequest(url, callback) {
   xhr.send();
 }
 
-function postCallback(post) {
-  var div = document.createElement('DIV');
-  div.innerHTML = 'Post title: ' + post.title;
-  document.body.append(div);
-}
-
-function commentCallback(comment) {
-  var div = document.createElement('DIV');
-  div.innerHTML = 'Comment name: ' + comment.name;
-  document.body.append(div);
-}
-
-function albumCallback(album) {
-  var div = document.createElement('DIV');
-  div.innerHTML = 'Album title: ' + album.title;
-  document.body.append(div);
-}
-
-function photoCallback(photo) {
-  var div = document.createElement('DIV');
-  div.innerHTML = 'Photo thumbnail: <img src="' + photo.thumbnailUrl + '" />';
-  document.body.append(div);
-}
-
-function todoCallback(todo) {
-  var div = document.createElement('DIV');
-  div.innerHTML = 'Todo title: ' + todo.title;
-  document.body.append(div);
-}
-
-function userCallback(user) {
-  var div = document.createElement('DIV');
-  div.innerHTML = 'User name: ' + user.name;
-  document.body.append(div);
-}
-
-var isPostShown = false;
-var isCommentShown = false;
-var isAlbumShown = false;
-var isPhotoShown = false;
-var isTodoShown = false;
-var isUserShown = false;
-
-var postResponse;
-var commentResponse;
-var albumResponse;
-var photoResponse;
-var todoResponse;
-var userResponse;
-
 function syncronizeCallbacks() {
-  if (postResponse) {
-    if (!isPostShown) {
-      postCallback(postResponse);
-      isPostShown = true;
+  if (xhrData[0].response) {
+    if (!xhrData[0].shown) {
+      xhrData[0].callback(xhrData[0].response);
+      xhrData[0].shown = true;
     }
   } else {
     return;
   }
 
-  if (commentResponse) {
-    if (!isCommentShown) {
-      commentCallback(commentResponse);
-      isCommentShown = true;
+  if (xhrData[1].response) {
+    if (!xhrData[1].shown) {
+      xhrData[1].callback(xhrData[1].response);
+      xhrData[1].shown = true;
     }
   } else {
     return;
   }
 
-  if (albumResponse) {
-    if (!isAlbumShown) {
-      albumCallback(albumResponse);
-      isAlbumShown = true;
+  if (xhrData[2].response) {
+    if (!xhrData[2].shown) {
+      xhrData[2].callback(xhrData[2].response);
+      xhrData[2].shown = true;
     }
   } else {
     return;
   }
 
-  if (photoResponse) {
-    if (!isPhotoShown) {
-      photoCallback(photoResponse);
-      isPhotoShown = true;
+  if (xhrData[3].response) {
+    if (!xhrData[3].shown) {
+      xhrData[3].callback(xhrData[3].response);
+      xhrData[3].shown = true;
     }
   } else {
     return;
   }
 
-  if (todoResponse) {
-    if (!isTodoShown) {
-      todoCallback(todoResponse);
-      isTodoShown = true;
+  if (xhrData[4].response) {
+    if (!xhrData[4].shown) {
+      xhrData[4].callback(xhrData[4].response);
+      xhrData[4].shown = true;
     }
   } else {
     return;
   }
 
-  if (userResponse) {
-    userCallback(userResponse);
+  if (xhrData[5].response) {
+    xhrData[5].callback(xhrData[5].response);
+    xhrData[5].shown = true;
   }
 }
 
-makeXhrRequest("https://jsonplaceholder.typicode.com/posts/1", function(response) {
-  postResponse = response;
-  syncronizeCallbacks();
-});
+const xhrData = [
+  {
+    url: "https://jsonplaceholder.typicode.com/posts/1",
+    functionResponse: (response) => {
+      xhrData[0].response = response;
+      // debugger;
+      syncronizeCallbacks();
+    },
+    callback: (post) => {
+      var div = document.createElement('DIV');
+      div.innerHTML = 'Post title: ' + post.title;
+      document.body.append(div);
+      // debugger;
+    },
+    response: null,
+    shown: false
+  },
+  {
+    url: "https://jsonplaceholder.typicode.com/comments/1",
+    functionResponse: (response) => {
+      xhrData[1].response = response;
+      syncronizeCallbacks();
+    },
+    callback: (comment) => {
+      var div = document.createElement('DIV');
+      div.innerHTML = 'Comment name: ' + comment.name;
+      document.body.append(div);
+    },
+    response: null,
+    shown: false
+  },
+  {
+    url: "https://jsonplaceholder.typicode.com/albums/1",
+    functionResponse: (response) => {
+      xhrData[2].response = response;
+      syncronizeCallbacks();
+    },
+    callback: (album) => {
+      var div = document.createElement('DIV');
+      div.innerHTML = 'Album title: ' + album.title;
+      document.body.append(div);
+    },
+    response: null,
+    shown: false
+  },
+  {
+    url: "https://jsonplaceholder.typicode.com/photos/1",
+    functionResponse: (response) => {
+      xhrData[3].response = response;
+      syncronizeCallbacks();
+    },
+    callback: (photo) =>{
+      var div = document.createElement('DIV');
+      div.innerHTML = 'Photo thumbnail: <img src="' + photo.thumbnailUrl + '" />';
+      document.body.append(div);
+    },
+    response: null,
+    shown: false
+  },
+  {
+    url: "https://jsonplaceholder.typicode.com/todos/1",
+    functionResponse: (response) => {
+      xhrData[4].response = response;
+      syncronizeCallbacks();
+    },
+    callback: (todo) => {
+      var div = document.createElement('DIV');
+      div.innerHTML = 'Todo title: ' + todo.title;
+      document.body.append(div);
+    },
+    response: null,
+    shown: false
+  },
+  {
+    url: "https://jsonplaceholder.typicode.com/users/1",
+    functionResponse: (response) => {
+      xhrData[5].response = response;
+      syncronizeCallbacks();
+    },
+    callback: (user) => {
+      var div = document.createElement('DIV');
+      div.innerHTML = 'User name: ' + user.name;
+      document.body.append(div);
+    },
+    response: null,
+    shown: false
+  }
+];
 
-makeXhrRequest("https://jsonplaceholder.typicode.com/comments/1", function(response) {
-  commentResponse = response;
-  syncronizeCallbacks();
-});
+xhrData.forEach(data => {
+  makeXhrRequest(data.url, data.functionResponse);
+}, xhrData);
 
-makeXhrRequest("https://jsonplaceholder.typicode.com/albums/1", function(response) {
-  albumResponse = response;
-  syncronizeCallbacks();
-});
 
-makeXhrRequest("https://jsonplaceholder.typicode.com/photos/1", function(response) {
-  photoResponse = response;
-  syncronizeCallbacks();
-});
-
-makeXhrRequest("https://jsonplaceholder.typicode.com/todos/1", function(response) {
-  todoResponse = response;
-  syncronizeCallbacks();
-});
-
-makeXhrRequest("https://jsonplaceholder.typicode.com/users/1", function(response) {
-  userResponse = response;
-  syncronizeCallbacks();
-});
