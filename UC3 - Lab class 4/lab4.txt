@@ -1,0 +1,46 @@
+` https://jsonplaceholder.typicode.com is holding a pre-thanksgiving celebration. As part of the festivities, 
+they are holding a race between their users. It is a race from the server to the client. 
+The first one to arrive will be named the winner, and can proudly deliver their company's catchPhrase. 
+Then the rest of the users will be listed in order of arrival, noting their position. 
+Once everyone arrived and the race is over, the viewers will be promptly notified. 
+The winner then will be excused from the responsibilty of entertaining the viewers and will be allowed 
+to take care of their incomplete todos. To raise compassion among the viewers, all the todos that they need to do will be listed. ` 
+
+Part 0: Make our xhr requests have a random delay between 0-5 seconds to make the race more interesting. '5 min' 
+Part 1: Request all 10 users one by one. '5 min' 
+Part 2: Use Promise.race to announce the winner. '10 min' 
+Part 3: Set up all the .then handlers for showing the contestants as they arrive. 
+You will need some kind of global variable to keep track of the places. Do not forget that the first one is already shown, 
+do not repeat him/her. '15 min' 
+Part 4: Use Promise.all to announce the end of the race. '10 min' 
+Part 5: Get all the todos belonging to the winner once we know who it is, 
+from "https://jsonplaceholder.typicode.com/users/:winnerId/todos" 
+
+
+
+// Appearence of the result
+
+And the winner is: Leanne Graham - Multi-layered client-server neural-net 
+
+2. Ervin Howell 
+3. Clementine Bauch 
+4. Patricia Lebsack 
+5. Chelsey Dietrich 
+6. Mrs. Dennis Schulist 
+7. Kurtis Weissnat 
+8. Nicholas Runolfsdottir V 
+9. Glenna Reichert 
+10. Clementina DuBuque 
+
+The race is over. 
+
+Unfortunately Leanne Graham has to leave to take care of the following: 
+- delectus aut autem 
+- quis ut nam facilis et officia qui 
+- fugiat veniam minus 
+- laboriosam mollitia et enim quasi adipisci quia provident illum 
+- qui ullam ratione quibusdam voluptatem quia omnis 
+- illo expedita consequatur quia in 
+- molestiae perspiciatis ipsa 
+- et doloremque nulla 
+- dolorum est consequatur ea mollitia in culpa
